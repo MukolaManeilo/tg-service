@@ -2,6 +2,15 @@
   "name": "tg-service",
   "version": "1.0.0",
   "main": "main.ts",
+  "scripts": {
+    "build": "rm -rf dist && tsc",
+    "build:prod": "rm -rf dist && tsc --project tsconfig.prod.json --removeComments",
+    "start": "node dist/main.js",
+    "dev": "tsx watch src/main.ts",
+    "pingpong": "tsx watch src/pingpong.ts",
+    "lint": "eslint 'src/**/*.{ts,js}' --fix",
+    "format": "prettier --write 'src/**/*.{ts,js}'"
+  },
   "repository": "git@github.com:MukolaManeilo/tg-service.git",
   "license": "MIT",
   "dependencies": {
@@ -9,7 +18,11 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.1",
+    "helmet": "^8.1.0",
+    "morgan": "^1.10.0",
     "passport": "^0.7.0",
+    "telegraf": "^4.16.3",
+    "typegram": "^5.2.0",
     "validator": "^13.12.0"
   },
   "devDependencies": {

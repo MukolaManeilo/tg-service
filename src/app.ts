@@ -1,15 +1,19 @@
 import express from 'express';
-import errorHandlerMiddleware from './middleware/errorHandler';
+import helmet from 'helmet';
+import errorHandlerMiddleware from './middlewares/errorHandlerMiddleware';
+import webhookRoutes from './webhook/webhookRoutes';
+import instanceApiRoutes from './instanceApi/instanceApiRoutes';
 
 const app = express();
 
 app.use(express.json());
+app.use(helmet());
 
-// app.use('/', apiWebHookRoutes);
-// app.use('/', authRoutes);
+app.use('/', webhookRoutes);
+app.use('/', instanceApiRoutes);
 
-app.get('/', (req, res) => {
-	res.json({ message: 'Hello World'});
+app.get('/healthcheck', (req, res) => {
+	res.json({ message: 'OK' });
 });
 app.use(errorHandlerMiddleware);
 

@@ -11,7 +11,6 @@ export default [
 			parser: tsParser,
 			globals: {
 				...globals.node,
-				...globals.jest,
 			},
 		},
 		plugins: {

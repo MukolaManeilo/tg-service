@@ -5,12 +5,13 @@ import { errorValidator } from '../utils/errorHandler';
 
 export const webhookHandler = async (req: Request, res: Response, next: NextFunction): Promise<any> => {
 	try {
-		if (
-			typeof req.body?.message?.from?.id !== 'number' ||
-			req.body.message.from.id.trim().length === 0 ||
-			typeof req.body.message.text !== 'string' ||
-			req.body.message.text.trim().length === 0
-		) {
+		const id = req.body?.message?.from?.id;
+		const text = req.body?.message?.text;
+
+		if (typeof id !== 'number' ||
+			!Number.isFinite(id) ||
+			typeof text !== 'string' ||
+			text.trim().length === 0) {
 			throw new BadDataError();
 		}
 
